@@ -20,12 +20,15 @@ log = get_logger("train_time")
 
 async def get_feed(url: str) -> gtfs.FeedMessage:
     global _cache
+
+    feed = _cache.get(url)
     if (
-        _cache
-        and time.time() <= _cache.get(url, gtfs.FeedMessage()).header.timestamp + 30
+        feed is not None
+        and feed.header is not None
+        and time.time() <= feed.header.timestamp + 30
     ):
         log.debug(f"Using cached feed for {url}")
-        return _cache[url]
+        return feed
 
     resp = await niquests.aget(url)
     resp.raise_for_status()
@@ -33,6 +36,7 @@ async def get_feed(url: str) -> gtfs.FeedMessage:
         raise ValueError("No content returned from the feed URL")
     feed = gtfs.FeedMessage.from_binary(resp.content)
     _cache[url] = feed
+    log.debug(f"Cache updated for {url}")
     return feed
 
 
