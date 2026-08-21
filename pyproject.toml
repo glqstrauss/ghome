@@ -1,0 +1,19 @@
+[project]
+name = "ghome"
+version = "0.1.0"
+description = "LED screen displaying transit and weather data so Gabe doesn't look at his phone in the morning."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = ["niquests>=3.21.0", "protobuf-py>=0.3.0"]
+
+[dependency-groups]
+dev = [
+    "black>=26.5.1",
+    "buf-bin>=1.72.0",
+    "ipython>=9.16.1",
+    "isort>=8.0.1",
+    "protoc-gen-py>=0.3.0",
+]
+
+[tool.isort]
+profile = "black"
