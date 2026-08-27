@@ -1,7 +1,4 @@
 from gen import gtfs_realtime_pb as gtfs
-
-# import to register the NYCT extensions
-import gen.gtfs_realtime_NYCT_pb as nyct
 import niquests
 from datetime import datetime
 import time
