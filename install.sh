@@ -30,17 +30,17 @@ MATRIX_DIR="$HOME/rpi-rgb-led-matrix"
 if [ ! -d "$MATRIX_DIR" ]; then
     echo "Sparse-cloning rpi-rgb-led-matrix (bindings/python only)..."
     git clone --filter=blob:none --no-checkout "$MATRIX_REPO" "$MATRIX_DIR"
-    git -C "$MATRIX_DIR" sparse-checkout set bindings/python lib
+    git -C "$MATRIX_DIR" sparse-checkout set bindings/python lib include
     git -C "$MATRIX_DIR" checkout
 else
     echo "Updating rpi-rgb-led-matrix..."
     git -C "$MATRIX_DIR" pull
 fi
 
-# --- build and install rgbmatrix ---
+# --- build and install rgbmatrix into ghome venv ---
 echo "Building and installing rgbmatrix Python bindings..."
-cd "$MATRIX_DIR/bindings/python"
-pip install .
+cd "$HOME/ghome"
+uv pip install "$MATRIX_DIR"
 
 # --- sync ghome deps ---
 echo "Syncing ghome dependencies..."
