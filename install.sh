@@ -46,7 +46,7 @@ fi
 
 # --- Pillow internal header workaround (github.com/hzeller/rpi-rgb-led-matrix/issues/1869) ---
 # The build requires Pillow's internal C headers which aren't shipped in modern wheels.
-PILLOW_VERSION=$(cd "$HOME/ghome" && uv pip show pillow | grep ^Version | awk '{print $2}')
+PILLOW_VERSION=$(grep -A2 'name = "pillow"' "$HOME/ghome/uv.lock" | grep version | awk -F'"' '{print $2}')
 SHIMS="$MATRIX_DIR/bindings/python/rgbmatrix/shims"
 PILLOW_BASE="https://raw.githubusercontent.com/python-pillow/Pillow/$PILLOW_VERSION/src/libImaging"
 echo "Fetching Pillow $PILLOW_VERSION internal headers..."
@@ -57,13 +57,9 @@ for header in Arrow.h Bcn.h Bit.h Convert.h Gif.h ImDib.h ImPlatform.h Imaging.h
     curl -LsSf -o "$SHIMS/$header" "$PILLOW_BASE/$header"
 done
 
-# --- build and install rgbmatrix into ghome venv ---
-echo "Building and installing rgbmatrix Python bindings (this will take a few minutes)..."
-cd "$HOME/ghome"
-uv pip install "$MATRIX_DIR"
-
-# --- sync ghome deps ---
+# --- sync all deps including rgbmatrix (builds from source, takes a few minutes first run) ---
 echo "Syncing ghome dependencies..."
+cd "$HOME/ghome"
 uv sync --group pi --no-group dev
 
 echo ""
