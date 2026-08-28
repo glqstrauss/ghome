@@ -57,10 +57,14 @@ for header in Arrow.h Bcn.h Bit.h Convert.h Gif.h ImDib.h ImPlatform.h Imaging.h
     curl -LsSf -o "$SHIMS/$header" "$PILLOW_BASE/$header"
 done
 
-# --- sync all deps including rgbmatrix (builds from source, takes a few minutes first run) ---
+# --- sync ghome deps ---
 echo "Syncing ghome dependencies..."
 cd "$HOME/ghome"
-uv sync --group pi --no-group dev
+uv sync --no-group dev
+
+# --- install rgbmatrix into the venv ---
+echo "Building and installing rgbmatrix Python bindings (takes a few minutes first run)..."
+uv pip install "$MATRIX_DIR"
 
 echo ""
-echo "Done. Run with: cd ~/ghome && sudo uv run src/ghome/display/__init__.py"
+echo "Done. Run with: sudo ~/ghome/.venv/bin/python src/ghome/display/__init__.py"
