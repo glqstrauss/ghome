@@ -228,6 +228,9 @@ dev = [
     { name = "protoc-gen-py" },
     { name = "rgbmatrixemulator" },
 ]
+pi = [
+    { name = "rgbmatrix", marker = "sys_platform == 'linux'" },
+]
 
 [package.metadata]
 requires-dist = [
@@ -245,6 +248,7 @@ dev = [
     { name = "protoc-gen-py", specifier = ">=0.3.0" },
     { name = "rgbmatrixemulator", specifier = ">=0.19.0" },
 ]
+pi = [{ name = "rgbmatrix", marker = "sys_platform == 'linux'", directory = "/home/admin/rpi-rgb-led-matrix" }]
 
 [[package]]
 name = "h11"
@@ -773,6 +777,11 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/05/48/77f3055a3790a515fc59b37cdf1f23c374f8a235c6fa1b110153b78668e4/qh3-1.9.4-cp37-abi3-win_amd64.whl", hash = "sha256:5543cb40a48d401f3fa4ec89398e3a213634f195716a9d06d70417c05edbbb32", size = 2130155, upload-time = "2026-07-13T06:34:30.526Z" },
     { url = "https://files.pythonhosted.org/packages/d3/bc/aec1f86da0d093a319f43d88b005b4b71efa94e8f675c2c9764098c2abb2/qh3-1.9.4-cp37-abi3-win_arm64.whl", hash = "sha256:d0bd73b3e73f4f80d2430d410b532222ecf57e9d4fe8600b7683c775cbff9479", size = 1980028, upload-time = "2026-07-13T06:34:32.376Z" },
 ]
+
+[[package]]
+name = "rgbmatrix"
+version = "0.0.1+20260125"
+source = { directory = "/home/admin/rpi-rgb-led-matrix" }
 
 [[package]]
 name = "rgbmatrixemulator"
