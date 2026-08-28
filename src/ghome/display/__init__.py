@@ -1,5 +1,4 @@
 import asyncio
-import os
 import sys
 import threading
 import time
@@ -21,16 +20,16 @@ CHAR_WIDTH = 6  # 5x7 font: 5px glyph + ~1px spacing
 CHAR_HEIGHT = 8  # 5x7 font: 7px glyph + ~1px spacing
 FONT = "5x7.bdf"
 
+font_dir = Path(__file__).resolve().parent.parent.parent.parent / "fonts"
+font = graphics.Font()
+font.LoadFont(str(font_dir / FONT))
+
 options = RGBMatrixOptions()
 options.rows = 32
 options.cols = 64
 
 matrix = RGBMatrix(options=options)
 canvas = matrix.CreateFrameCanvas()
-
-font_dir = Path(__file__).resolve().parent.parent.parent.parent / "fonts"
-font = graphics.Font()
-font.LoadFont(str(font_dir / FONT))
 
 WHITE = graphics.Color(255, 255, 255)
 
