@@ -1,11 +1,11 @@
 import asyncio
 import os
-from ssl import CHANNEL_BINDING_TYPES
 import sys
 import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime
+from pathlib import Path
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING or sys.platform == "darwin":
@@ -28,9 +28,9 @@ options.cols = 64
 matrix = RGBMatrix(options=options)
 canvas = matrix.CreateFrameCanvas()
 
-font_dir = os.path.abspath(os.path.dirname(__file__) + "/../../../fonts")
+font_dir = Path(__file__).resolve().parent.parent.parent.parent / "fonts"
 font = graphics.Font()
-font.LoadFont(os.path.join(font_dir, FONT))
+font.LoadFont(str(font_dir / FONT))
 
 WHITE = graphics.Color(255, 255, 255)
 
