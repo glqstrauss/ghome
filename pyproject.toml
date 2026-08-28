@@ -15,6 +15,9 @@ dependencies = [
 ]
 
 [dependency-groups]
+pi = [
+    "rgbmatrix @ file:///home/admin/rpi-rgb-led-matrix ; sys_platform == 'linux'",
+]
 dev = [
     "black>=26.5.1",
     "buf-bin>=1.72.0",
