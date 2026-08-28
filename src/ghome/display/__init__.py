@@ -27,6 +27,8 @@ font.LoadFont(str(font_dir / FONT))
 options = RGBMatrixOptions()
 options.rows = 32
 options.cols = 64
+options.hardware_mapping = "adafruit-hat"
+options.gpio_slowdown = 2
 
 matrix = RGBMatrix(options=options)
 canvas = matrix.CreateFrameCanvas()
